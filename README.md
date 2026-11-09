@@ -1,11 +1,14 @@
 # DEN Pets
 
-Pet-related features for DEN Global applications.
+DEN Pets is the pet profiles and care-service discovery app in the DEN network.
 
-## Purpose
+- `/pets/` is served by the existing DEN development backend.
+- Pet profiles are private to their owner.
+- Providers must own an approved DEN organization; new and edited listings wait for administrator review.
+- Booking, payments, pet sales, and adoption are not implemented in this release.
 
-This repository will hold the DEN pet feature as its scope is defined. Keep account identity, shared sessions, and platform authorization in `den-backend`; integrate through its established API rather than creating a second account system.
+See [PRODUCT.md](PRODUCT.md) for the initial scope and [API.md](API.md) for the same-origin API contract.
 
-## Starting point
+## Local development
 
-The first feature, user roles, and data model have not been defined yet. Before implementation, agree whether this repo covers pet profiles, pet products, care services, adoption, or another app workflow. Any purchase or adoption flow must follow the platform's existing review and safety requirements.
+Install dependencies with `npm ci`, then run `npm run dev` for the standalone Vite server or `npm run build` to create `dist/` for the integrated backend preview.
