@@ -1,5 +1,5 @@
 import ThemeToggle from '@den/shared/ThemeToggle';
-import NetworkScene from '@den/shared/NetworkScene';
+import RevealArtwork from '@den/shared/RevealArtwork';
 import {useEffect,useMemo,useRef,useState} from 'react';
 import {ArrowDown,ArrowRight,ArrowUpRight,Check,LogOut,MapPin,PawPrint,Plus,RefreshCw,Search,ShieldCheck,X} from 'lucide-react';
 import {api} from './api.js';
@@ -50,12 +50,12 @@ export default function App(){
  </div>;
 }
 
-function SignIn({error,onRetry}){return <main className="signin-screen"><a className="brand-lockup" href="/consumer/"><span className="brand-mark"><i/><i/><i/><i/></span><span><strong>DEN Global</strong><small>One network. Every journey.</small></span></a><section className="signin-card"><ThemeToggle/><span className="eyebrow">DEN PETS</span><h1>Care starts with a connection.</h1><p>Sign in with your DEN account to manage pet profiles and discover reviewed care services.</p>{error?<p role="alert" className="inline-error">{error}<button onClick={onRetry}>Retry</button></p>:null}<a className="button button-dark" href="/consumer/?entry=1">Continue to DEN sign in <span aria-hidden="true">↗</span></a><p className="small-note">Your pet profiles are private to your account.</p><NetworkScene compact/></section></main>;}
+function SignIn({error,onRetry}){return <main className="signin-screen"><a className="brand-lockup" href="/consumer/"><span className="brand-mark"><i/><i/><i/><i/></span><span><strong>DEN Global</strong><small>One network. Every journey.</small></span></a><section className="signin-card"><ThemeToggle/><span className="eyebrow">DEN PETS</span><h1>Care starts with a connection.</h1><p>Sign in with your DEN account to manage pet profiles and discover reviewed care services.</p>{error?<p role="alert" className="inline-error">{error}<button onClick={onRetry}>Retry</button></p>:null}<a className="button button-dark" href="/consumer/?entry=1">Continue to DEN sign in <span aria-hidden="true">↗</span></a><p className="small-note">Your pet profiles are private to your account.</p><RevealArtwork/></section></main>;}
 
 function Discover({services,loading,query,setQuery,filter,setFilter,onRefresh,onOffer,hasOrganizations}){return <>
  <section className="hero">
   <div className="hero-copy"><h1>Good care finds<br/>its way <em>home.</em></h1><p>Keep your pet profiles close and find thoughtful care from DEN’s growing provider network.</p><div className="hero-actions"><button className="button button-dark" onClick={()=>document.querySelector('#service-search')?.focus()}>Find pet care <ArrowDown size={15}/></button><button className="button button-light" onClick={onOffer}>Offer a service <ArrowUpRight size={15}/></button></div><div className="trust-line"><ShieldCheck size={15}/>Service listings are reviewed before they appear.</div></div>
-  <div className="hero-art"><NetworkScene compact/></div>
+  <div className="hero-art"><RevealArtwork/></div>
  </section>
  <section className="search-section" aria-label="Find a pet care service"><div className="search-title"><h2>Find care that fits.</h2><p>Search reviewed providers by service or area.</p></div><div className="search-control"><Search size={18}/><input id="service-search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search a service, provider, or area" aria-label="Search services"/><button onClick={onRefresh} aria-label="Refresh services"><RefreshCw size={16}/></button></div><div className="category-row" role="group" aria-label="Filter by service type">{categories.map(([key,label])=><button key={key} className={filter===key?'active':''} aria-pressed={filter===key} onClick={()=>setFilter(key)}>{label}</button>)}</div></section>
  <section className="directory-section"><div className="section-heading"><div><h2>{filter==='all'?'Care around you':`${categoryLabel(filter)} near you`}</h2><p>Reviewed care listings from DEN organizations.</p></div><button className="text-action" onClick={onRefresh}>Refresh directory <RefreshCw size={13}/></button></div>
